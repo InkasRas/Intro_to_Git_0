@@ -9,7 +9,10 @@ import random
 class Example(QMainWindow, QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('UI.ui', self)
+        self.setGeometry(0, 0, 1000, 1000)
+        self.pushButton = QPushButton('PUSH', self)
+        self.pushButton.resize(150, 150)
+        self.pushButton.move(50, 50)
         self.clicked = False
         self.pushButton.clicked.connect(self.run)
 
@@ -25,10 +28,16 @@ class Example(QMainWindow, QWidget):
             paint.setRenderHint(QPainter.Antialiasing)
             paint.setBrush(Qt.white)
             paint.drawRect(evnt.rect())
-            paint.setPen(Qt.yellow)
+            col = QColor(random.randint(0, 255),
+                         random.randint(0, 255),
+                         random.randint(0, 255))
+            paint.setPen(col)
             for k in range(random.randint(5, 20)):
                 center = QPoint(random.randint(0, 1000), random.randint(0, 1000))
-                paint.setBrush(Qt.yellow)
+                col = QColor(random.randint(0, 255),
+                             random.randint(0, 255),
+                             random.randint(0, 255))
+                paint.setBrush(col)
                 d = random.randint(40, 150)
                 paint.drawEllipse(center, d, d)
             paint.end()
